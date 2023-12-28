@@ -40,7 +40,7 @@ services:
       net2:      
         ipv4_address: 10.0.1.250
     sysctls:
-      - net.ipv4.ip_forward=1
+      - net.ipv4.ip_forward=0
     entrypoint: /mnt/entrypoint.sh
       
 networks:
