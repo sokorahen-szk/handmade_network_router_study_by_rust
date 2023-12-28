@@ -35,8 +35,6 @@ function create_file() {
     touch $1
 }
 
-
-
 for file in ${TARGET_FILES[@]}; do
     exists_path $CURRENT_PATH/$file
     if [ $? -eq 0 ]; then
