@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  alice:
+    build: ./alice
+    container_name: alice-container
+    hostname: Alice
+    stdin_open: true
+    privileged: true
+    volumes:
+      - ./alice/mnt:/mnt
+    networks:
+      net1:      
+        ipv4_address: 10.0.0.10
+    entrypoint: /mnt/entrypoint.sh
+
+  bob:
+    build: ./bob
+    container_name: bob-container
+    hostname: Bob
+    stdin_open: true
+    privileged: true
+    volumes:
+      - ./bob/mnt:/mnt
+    networks:
+      net2:      
+        ipv4_address: 10.0.1.10
+    entrypoint: /mnt/entrypoint.sh
+
+  router:
+    build: ./router
+    container_name: router-container
+    hostname: Router
+    privileged: true
+    volumes:
+      - ./router/mnt:/mnt
+    networks:
+      net1:
+        ipv4_address: 10.0.0.250
+      net2:      
+        ipv4_address: 10.0.1.250
+    sysctls:
+      - net.ipv4.ip_forward=1
+    entrypoint: /mnt/entrypoint.sh
+      
+networks:
+  net1:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+  net2:
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24

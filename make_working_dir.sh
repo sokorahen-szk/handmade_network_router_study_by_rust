@@ -11,8 +11,6 @@ readonly TARGET_FILES=(
     "router/Dockerfile"
     "router/router.env"
     "router/mnt/entrypoint.sh"
-    "router/mnt/router-rs/Cargo.toml"
-    "router/mnt/router-rs/src/main.rs"
 )
 
 function exists_path () {
